@@ -1,6 +1,10 @@
 const mongoose = require('mongoose')
-const dns = require('dns')
-dns.setServers(['8.8.8.8', '8.8.4.4'])
+
+// Local routers sometimes can't resolve MongoDB SRV records — use Google DNS in dev only
+if (process.env.NODE_ENV !== 'production') {
+  const dns = require('dns')
+  dns.setServers(['8.8.8.8', '8.8.4.4'])
+}
 
 let isConnected = false
 
