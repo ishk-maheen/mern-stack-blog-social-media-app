@@ -865,7 +865,7 @@ const Footer = () => (
       <div className="pt-8 border-t border-gray-100 dark:border-gray-800
         flex flex-col sm:flex-row items-center justify-between gap-4">
         <p className="text-xs text-gray-400 dark:text-gray-500">
-          © 2025 Feedora. All rights reserved.
+          © 2026 Feedora. All rights reserved.
         </p>
         <div className="flex items-center gap-4">
           {/* Social links */}
