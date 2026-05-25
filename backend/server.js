@@ -10,11 +10,28 @@ const app = express()
 // Connect to MongoDB (cached for Vercel serverless)
 connectDB()
 
-// ── Middleware ──────────────────────────────────────────────────────────────
-app.use(cors({
-  origin: process.env.FRONTEND_URL || '*',
+// ── CORS ────────────────────────────────────────────────────────────────────
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://mern-stack-blog-social-media-app-fu.vercel.app',
+]
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    // Allow server-to-server / curl / Postman (no Origin header)
+    if (!origin || allowedOrigins.includes(origin)) return callback(null, true)
+    callback(new Error('Not allowed by CORS'))
+  },
   credentials: true,
-}))
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}
+
+// Handle preflight OPTIONS before any route
+app.options('*', cors(corsOptions))
+app.use(cors(corsOptions))
+
+// ── Middleware ──────────────────────────────────────────────────────────────
 app.use(express.json({ limit: '10mb' }))
 app.use(express.urlencoded({ extended: true, limit: '10mb' }))
 
