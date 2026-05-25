@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Firefox scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: #d1d5db transparent;
+  }
+  html.dark {
+    scrollbar-color: #374151 transparent;
+  }
+
+  body {
+    @apply m-0 font-sans antialiased bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100 transition-colors duration-200;
+  }
+
+  #root {
+    @apply min-h-screen;
+  }
+
+  /* Webkit scrollbar */
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+  }
+  .dark ::-webkit-scrollbar-thumb {
+    background: #374151;
+  }
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: #4b5563;
+  }
+
+  /* Text selection */
+  ::selection {
+    background-color: #3b82f6;
+    color: #fff;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
